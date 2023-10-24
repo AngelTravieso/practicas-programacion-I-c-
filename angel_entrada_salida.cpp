@@ -1,91 +1,66 @@
 #include <iostream>
-#include <cstdio>
 #include <string>
-#include<bits/stdc++.h> 
+#include <cstdio>
 
 using namespace std;
 
-/**
- * @brief Valida las prelaciones de una materia dada.
- * @param materia La materia que se va a validar.
- * @return Un string que describe las prelaciones de la materia.
- */
-string validarPrelaciones( string materia ) {
-
-    // Convertir la materia a minusculas
-    transform(materia.begin(), materia.end(), materia.begin(), ::tolower);
-
-    if( materia == "tecnicas de estudio e investigación") {
-        return "No hay prelación";
-    } else if(materia == "estructura de datos") {
-        return "procesamiento de datos";
-    } else if(materia == "ingles instrumental I") {
-        return "ingles instrumental II";
-    } else if(materia == "programacion I") {
-        return "programacion II";
-    } else if(materia == "estadistica general") {
-        return "estadistica aplicada";
-    } else if(materia == "matematica II") {
-        return "matematica III";
-    } else if(materia == "redaccion de informes tecnicos") {
-        return "No hay prelacion";
-    } else {
-        return "Materia no reconocida";
-    }
-}
-
-// * Práctica 04 - Programación I ISUM
 int main() {
-
     string nombre, carrera, semestre;
     string materias[7];
 
-    // * 1. Imprime como primera línea: Bienvenido a ISUM ONLINE
-    printf("Bienvenido a ISUM ONLINE \n");
+    printf("Bienvenido a ISUM ONLINE\n");
 
-    // * 2. Imprime como segunda línea: Soy el estudiante No.xxxx (xxxxx numero de carnet)
-    printf("Soy el estudiante No. V28302991 \n");
+    printf("Soy el estudiante No.xxxx (Ingresa tu numero de carnet): ");
+    string numeroCarnet;
+    cin >> numeroCarnet;
+    printf("Soy el estudiante No.%s\n", numeroCarnet.c_str());
 
-    // * Ingresa tu nombre completo
-    printf("Ingresa tu nombre completo: \n");
+    printf("Ingresa tu nombre completo: ");
     cin.ignore();
     getline(cin, nombre);
 
-    // * Ingresa la carrera que cursas
-    printf("Indica la carrera que cursas: \n");
-    cin.ignore();
+    printf("Indica la carrera que cursas: ");
     getline(cin, carrera);
 
-    // * Ingresa el semestre que cursas
-    printf("Ingresa el semestre que cursas actualmente (Nro): \n");
-    cin.ignore();
+    printf("Ingresa el semestre que cursas actualmente (Nro): ");
     getline(cin, semestre);
 
     int numeroMaterias = sizeof(materias) / sizeof(materias[0]);
 
-    // * Prelaciones de las materias cursadas (2do semestre)
-    printf("Ingresa las materias que cursas en el %s semestre: \n", semestre);
-    for(int i = 0; i < numeroMaterias; i++) {
-        // printf("Materia Nro %d: ", i + 1);
-        // cin >> materias[i];
-        // cin.ignore(); // Limpia el búfer de entrada
-        cout << "Materia Nro " << i + 1 << ": ";
-        getline(cin, materias[i]); // Usamos getline para leer la línea completa
-        cin.ignore();
+    printf("Ingresa las materias que cursas en el %s semestre:\n", semestre.c_str());
+    for (int i = 0; i < numeroMaterias; i++) {
+        printf("Materia No.%d: ", i + 1);
+        getline(cin, materias[i]);
     }
 
-    // * Imprimir resultado final
-    // printf("Hola %s, estas en el %s semestre de la carrera %s \n", nombre, semestre, carrera);
-    cout << "Hola " << nombre << ", estas en el " << semestre << " semestre de la carrera " << carrera << endl;
+    printf("Hola %s, estas en el %s semestre de la carrera %s\n", nombre.c_str(), semestre.c_str(), carrera.c_str());
 
-    // * Imprimir materias cursadas
-    printf("Estas cursando las siguientes materias: \n");
-    for(int i = 0; i < numeroMaterias; i++) {
-        cout << "Materia Nro. " << i + 1 << " (" << materias[i] << ") -> prelacion: " << validarPrelaciones(materias[i]) << endl;
+    printf("Estas cursando las siguientes materias:\n");
+    for (int i = 0; i < numeroMaterias; i++) {
+        string prelacion;
+
+        if (materias[i] == "estadistica general") {
+            prelacion = "estadistica aplicada";
+        } else if (materias[i] == "matematica I") {
+            prelacion = "matematica II";
+        } else if (materias[i] == "programacion I") {
+            prelacion = "programacion II";
+        } else if (materias[i] == "estructura de datos") {
+            prelacion = "procesamiento de datos";
+        } else if (materias[i] == "ingles instrumental I") {
+            prelacion = "ingles instrumental II";
+        } else if (materias[i] == "tecnicas de estudio e investigacion") {
+            prelacion = "No hay prelacion";
+        } else if (materias[i] == "redaccion de informes tecnicos") {
+            prelacion = "No hay prelacion";
+        } else {
+            prelacion = "Materia no reconocida";
+        }
+
+        printf("Materia No.%d (%s) -> prelacion: %s\n", i + 1, materias[i].c_str(), prelacion.c_str());
     }
 
     printf("Programa finalizado...");
 
     return 0;
-
 }
